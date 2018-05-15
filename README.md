@@ -1,0 +1,1 @@
+Example of tab navigator customization.
