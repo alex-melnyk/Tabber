@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Animated, Easing, TouchableHighlight, View} from "react-native";
+import {Animated, Easing, TouchableHighlight, TouchableOpacity, View} from "react-native";
 import Icon from '@expo/vector-icons/FontAwesome';
 import PropTypes from 'prop-types';
 
@@ -15,52 +15,25 @@ class AddButton extends Component {
 
     toggleView = () => {
         if (this.mode._value) {
-            Animated.parallel([
-                Animated.timing(this.mode, {
+            Animated.parallel(
+                [this.mode, this.icon1, this.icon2, this.icon3].map((item) => Animated.timing(item, {
                     toValue: 0,
                     duration: durationIn,
                     easing: Easing.cubic
-                }),
-                Animated.timing(this.icon1, {
-                    toValue: 0,
-                    duration: durationIn,
-                    easing: Easing.cubic
-                }),
-                Animated.timing(this.icon2, {
-                    toValue: 0,
-                    duration: durationIn,
-                    easing: Easing.cubic
-                }),
-                Animated.timing(this.icon3, {
-                    toValue: 0,
-                    duration: durationIn,
-                    easing: Easing.cubic
-                })
-            ]).start();
+                }))
+            ).start();
         } else {
-            Animated.parallel([
-                Animated.sequence([
-                    Animated.timing(this.mode, {
-                        toValue: 1,
-                        duration: durationOut,
-                        easing: Easing.cubic
-                    }),
-                    Animated.timing(this.icon1, {
-                        toValue: 1,
-                        duration: durationOut,
-                        easing: Easing.elastic(1)
-                    }),
-                    Animated.timing(this.icon2, {
-                        toValue: 1,
-                        duration: durationOut,
-                        easing: Easing.elastic(1)
-                    }),
-                    Animated.timing(this.icon3, {
-                        toValue: 1,
-                        duration: durationOut,
-                        easing: Easing.elastic(1)
-                    })
-                ])
+            Animated.sequence([
+                Animated.timing(this.mode, {
+                    toValue: 1,
+                    duration: durationOut,
+                    easing: Easing.cubic
+                }),
+                ...[this.icon1, this.icon2, this.icon3].map((item) => Animated.timing(item, {
+                    toValue: 1,
+                    duration: durationOut,
+                    easing: Easing.elastic(1)
+                }))
             ]).start();
         }
     };
@@ -96,6 +69,16 @@ class AddButton extends Component {
             outputRange: ['0deg', '45deg']
         });
 
+        const bluring = this.mode.interpolate({
+            inputRange: [0, 1],
+            outputRange: [10, 5]
+        });
+
+        const blurin2 = this.mode.interpolate({
+            inputRange: [0, 1],
+            outputRange: [0, -20]
+        });
+
         return (
             <View style={{
                 position: 'absolute',
@@ -123,26 +106,24 @@ class AddButton extends Component {
                     icon="archive"
                 />
 
-                <TouchableHighlight
-                    onPress={this.toggleView}
-                    underlayColor="#2882D8"
-                    style={{
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        width: SIZE,
-                        height: SIZE,
-                        borderRadius: SIZE / 2,
-                        backgroundColor: '#48A2F8'
-                    }}
-                >
-                    <Animated.View style={{
-                        transform: [
-                            {rotate: rotation}
-                        ]
-                    }}>
+                <Animated.View style={{
+                    transform: [
+                        // {rotate: rotation}
+                    ],
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    width: SIZE,
+                    height: SIZE,
+                    borderRadius: SIZE / 2,
+                    backgroundColor: '#48A2F8',
+                }}>
+                    <TouchableOpacity
+                        onPress={this.toggleView}
+                        activeOpacity={1}
+                    >
                         <Icon name="plus" size={24} color="#F8F8F8"/>
-                    </Animated.View>
-                </TouchableHighlight>
+                    </TouchableOpacity>
+                </Animated.View>
             </View>
         );
     }
