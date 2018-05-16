@@ -34,7 +34,7 @@ const BaseNavigator = createBottomTabNavigator({
         })
     },
     Adding: {
-        screen: Blank,
+        screen: () => null,
         navigationOptions: () => ({
             tabBarIcon: <AddButton />
         })
