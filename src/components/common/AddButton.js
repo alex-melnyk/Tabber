@@ -45,6 +45,11 @@ class AddButton extends Component {
             outputRange: [0, 1]
         });
 
+        const rotation = this.mode.interpolate({
+            inputRange: [0, 1],
+            outputRange: ['0deg', '45deg']
+        });
+
         return (
             <View style={{
                 position: 'absolute',
@@ -128,7 +133,13 @@ class AddButton extends Component {
                         backgroundColor: '#48A2F8'
                     }}
                 >
-                    <Icon name="plus" size={24} color="#F8F8F8"/>
+                    <Animated.View style={{
+                        transform: [
+                            {rotate: rotation}
+                        ]
+                    }}>
+                        <Icon name="plus" size={24} color="#F8F8F8"/>
+                    </Animated.View>
                 </TouchableHighlight>
             </View>
         );
