@@ -17,7 +17,7 @@ class AddButton extends Component {
     render() {
         const firstX = this.mode.interpolate({
             inputRange: [0, 1],
-            outputRange: [20, -25]
+            outputRange: [20, -40]
         });
         const firstY = this.mode.interpolate({
             inputRange: [0, 1],
@@ -29,11 +29,11 @@ class AddButton extends Component {
         });
         const secondY = this.mode.interpolate({
             inputRange: [0, 1],
-            outputRange: [0, -45]
+            outputRange: [0, -55]
         });
         const thirdX = this.mode.interpolate({
             inputRange: [0, 1],
-            outputRange: [20, 65]
+            outputRange: [20, 80]
         });
         const thirdY = this.mode.interpolate({
             inputRange: [0, 1],
