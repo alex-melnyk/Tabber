@@ -23,17 +23,20 @@ class AddButton extends Component {
                 }))
             ).start();
         } else {
-            Animated.sequence([
+
+            Animated.parallel([
                 Animated.timing(this.mode, {
                     toValue: 1,
                     duration: durationOut,
                     easing: Easing.cubic
                 }),
-                ...[this.icon1, this.icon2, this.icon3].map((item) => Animated.timing(item, {
-                    toValue: 1,
-                    duration: durationOut,
-                    easing: Easing.elastic(1)
-                }))
+                Animated.sequence([
+                    ...[this.icon1, this.icon2, this.icon3].map((item) => Animated.timing(item, {
+                        toValue: 1,
+                        duration: durationOut,
+                        easing: Easing.elastic(1)
+                    }))
+                ])
             ]).start();
         }
     };
@@ -108,7 +111,7 @@ class AddButton extends Component {
 
                 <Animated.View style={{
                     transform: [
-                        // {rotate: rotation}
+                        {rotate: rotation}
                     ],
                     alignItems: 'center',
                     justifyContent: 'center',
