@@ -1,12 +1,14 @@
 import React from 'react';
 import {createBottomTabNavigator} from 'react-navigation';
+import Icon from 'react-native-vector-icons/FontAwesome';
+
+import {AddButton} from "../components/common/AddButton";
+
 import Bookmarks from "../components/Bookmarks";
-import Icon from '@expo/vector-icons/FontAwesome';
 import Likes from "../components/Likes";
-import Blank from "../components/common/Blank";
 import Private from "../components/Private";
 import Profile from "../components/Profile";
-import {AddButton} from "../components/common/AddButton";
+
 
 const BaseNavigator = createBottomTabNavigator({
     Bookmarks: {

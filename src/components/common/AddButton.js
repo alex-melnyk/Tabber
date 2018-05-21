@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {Animated, Easing, TouchableHighlight, TouchableOpacity, View} from "react-native";
-import Icon from '@expo/vector-icons/FontAwesome';
 import PropTypes from 'prop-types';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import ViewOverflow from 'react-native-view-overflow';
 
 const SIZE = 80;
 const durationIn = 300;
@@ -83,7 +84,7 @@ class AddButton extends Component {
         });
 
         return (
-            <View style={{
+            <ViewOverflow style={{
                 position: 'absolute',
                 alignItems: 'center'
             }}>
@@ -127,7 +128,7 @@ class AddButton extends Component {
                         <Icon name="plus" size={24} color="#F8F8F8"/>
                     </TouchableOpacity>
                 </Animated.View>
-            </View>
+            </ViewOverflow>
         );
     }
 }

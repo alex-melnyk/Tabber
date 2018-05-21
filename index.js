@@ -1,8 +1,8 @@
 import React from 'react';
-import {BaseNavigator} from "./src/navigation";
-import {View} from "react-native";
+import {AppRegistry, View} from 'react-native';
 
-//
+import {BaseNavigator} from "./src/navigation";
+
 const App = () => (
     <View style={{
         flex: 1,
@@ -12,4 +12,4 @@ const App = () => (
     </View>
 );
 
-export default App;
+AppRegistry.registerComponent('tabber', () => App);
