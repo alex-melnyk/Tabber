@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
-import {View, Text, SafeAreaView} from 'react-native';
-import PropTypes from 'prop-types';
+import {SafeAreaView, Text} from 'react-native';
 
 class Bookmarks extends Component {
     render() {

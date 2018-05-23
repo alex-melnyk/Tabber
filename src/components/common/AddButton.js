@@ -1,8 +1,11 @@
 import React, {Component} from 'react';
-import {Animated, Easing, TouchableHighlight, TouchableOpacity, View} from "react-native";
+import {Animated, Easing, TouchableOpacity, TouchableWithoutFeedback, View} from "react-native";
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import ViewOverflow from 'react-native-view-overflow';
+import {transform} from "../../utils/anim";
+
+const AnimatedViewOverflow = Animated.createAnimatedComponent(ViewOverflow);
 
 const SIZE = 80;
 const durationIn = 300;
@@ -24,7 +27,6 @@ class AddButton extends Component {
                 }))
             ).start();
         } else {
-
             Animated.parallel([
                 Animated.timing(this.mode, {
                     toValue: 1,
@@ -45,27 +47,41 @@ class AddButton extends Component {
     render() {
         const firstX = this.icon1.interpolate({
             inputRange: [0, 1],
-            outputRange: [20, -40]
+            outputRange: [0, -50]
         });
         const firstY = this.icon1.interpolate({
             inputRange: [0, 1],
-            outputRange: [0, -30]
+            outputRange: [0, -50]
         });
+        const firstZ = this.icon1.interpolate({
+            inputRange: [0, 1],
+            outputRange: [0, 1]
+        });
+
         const secondX = this.icon2.interpolate({
             inputRange: [0, 1],
-            outputRange: [20, 20]
+            outputRange: [0, 0]
         });
         const secondY = this.icon2.interpolate({
             inputRange: [0, 1],
-            outputRange: [0, -55]
+            outputRange: [0, -70]
         });
+        const secondZ = this.icon2.interpolate({
+            inputRange: [0, 1],
+            outputRange: [0, 1]
+        });
+
         const thirdX = this.icon3.interpolate({
             inputRange: [0, 1],
-            outputRange: [20, 80]
+            outputRange: [0, 50]
         });
         const thirdY = this.icon3.interpolate({
             inputRange: [0, 1],
-            outputRange: [0, -30]
+            outputRange: [0, -50]
+        });
+        const thirdZ = this.icon3.interpolate({
+            inputRange: [0, 1],
+            outputRange: [0, 1]
         });
 
         const rotation = this.mode.interpolate({
@@ -73,61 +89,47 @@ class AddButton extends Component {
             outputRange: ['0deg', '45deg']
         });
 
-        const bluring = this.mode.interpolate({
-            inputRange: [0, 1],
-            outputRange: [10, 5]
-        });
-
-        const blurin2 = this.mode.interpolate({
-            inputRange: [0, 1],
-            outputRange: [0, -20]
-        });
-
         return (
             <ViewOverflow style={{
-                position: 'absolute',
-                alignItems: 'center'
+                // position: 'absolute',
+                alignItems: 'center',
+                justifyContent: 'center'
             }}>
                 <SubAddButton
-                    style={{
-                        left: firstX,
-                        top: firstY
-                    }}
+                    style={{transform: transform(firstX, firstY, firstZ)}}
                     icon="rocket"
+                    onPress={() => console.log('OK1')}
                 />
                 <SubAddButton
-                    style={{
-                        left: secondX,
-                        top: secondY
-                    }}
+                    style={{transform: transform(secondX, secondY, secondZ)}}
                     icon="home"
+                    onPress={() => console.log('OK2')}
                 />
                 <SubAddButton
-                    style={{
-                        left: thirdX,
-                        top: thirdY
-                    }}
+                    style={{transform: transform(thirdX, thirdY, thirdZ)}}
                     icon="archive"
+                    onPress={() => console.log('OK3')}
                 />
 
-                <Animated.View style={{
-                    transform: [
-                        {rotate: rotation}
-                    ],
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    width: SIZE,
-                    height: SIZE,
-                    borderRadius: SIZE / 2,
-                    backgroundColor: '#48A2F8',
+                <AnimatedViewOverflow style={{
+                    transform: [{rotate: rotation}]
                 }}>
-                    <TouchableOpacity
+                    <TouchableWithoutFeedback
                         onPress={this.toggleView}
                         activeOpacity={1}
                     >
-                        <Icon name="plus" size={24} color="#F8F8F8"/>
-                    </TouchableOpacity>
-                </Animated.View>
+                        <View style={{
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            width: SIZE,
+                            height: SIZE,
+                            borderRadius: SIZE / 2,
+                            backgroundColor: '#48A2F8',
+                        }}>
+                            <Icon name="plus" size={24} color="#F8F8F8"/>
+                        </View>
+                    </TouchableWithoutFeedback>
+                </AnimatedViewOverflow>
             </ViewOverflow>
         );
     }
@@ -142,14 +144,15 @@ class SubAddButton extends Component {
         } = this.props;
 
         return (
-            <Animated.View style={{
+            <AnimatedViewOverflow style={{
                 position: 'absolute',
+                width: SIZE / 2,
+                height: SIZE / 2,
                 ...style
             }}>
-                <TouchableHighlight
+                <TouchableOpacity
                     onPress={() => onPress && onPress()}
                     style={{
-                        position: 'absolute',
                         alignItems: 'center',
                         justifyContent: 'center',
                         width: SIZE / 2,
@@ -159,8 +162,8 @@ class SubAddButton extends Component {
                     }}
                 >
                     <Icon name={icon} size={16} color="#F8F8F8"/>
-                </TouchableHighlight>
-            </Animated.View>
+                </TouchableOpacity>
+            </AnimatedViewOverflow>
         );
     }
 }
