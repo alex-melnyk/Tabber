@@ -3358,6 +3358,10 @@ react-native-gesture-handler@^1.0.0:
     invariant "^2.2.2"
     prop-types "^15.5.10"
 
+react-native-overflow-view@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/react-native-overflow-view/-/react-native-overflow-view-1.0.2.tgz#83e12cc9a58a7d7b35f82bd03b9d888906ce5e71"
+
 react-native-safe-area-view@^0.11.0:
   version "0.11.0"
   resolved "https://registry.yarnpkg.com/react-native-safe-area-view/-/react-native-safe-area-view-0.11.0.tgz#4f3dda43c2bace37965e7c6aef5fc83d4f19d174"
@@ -3381,10 +3385,6 @@ react-native-vector-icons@^6.1.0:
     lodash "^4.0.0"
     prop-types "^15.6.2"
     yargs "^8.0.2"
-
-react-native-view-overflow@^0.0.3:
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/react-native-view-overflow/-/react-native-view-overflow-0.0.3.tgz#d7b08e8c1e5047a2cf07f3ece82025899f930674"
 
 react-native@^0.57.8:
   version "0.57.8"

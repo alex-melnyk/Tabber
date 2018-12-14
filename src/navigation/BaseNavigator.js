@@ -1,12 +1,8 @@
 import React from 'react';
 import {createAppContainer, createBottomTabNavigator} from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import ViewOverflow from 'react-native-view-overflow';
 
-import Bookmarks from "../components/Bookmarks";
-import Likes from "../components/Likes";
-import Private from "../components/Private";
-import Profile from "../components/Profile";
+import {AddButton, Bookmarks, Likes, Private, Profile} from "../components";
 
 
 const BaseNavigator = createBottomTabNavigator({
@@ -34,10 +30,12 @@ const BaseNavigator = createBottomTabNavigator({
             )
         })
     },
-    Adding: {
+    MultiBar: {
         screen: () => null,
         navigationOptions: () => ({
-            tabBarIcon: null
+            tabBarIcon: (
+                <AddButton/>
+            )
         })
     },
     Private: {

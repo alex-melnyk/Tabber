@@ -1,7 +1,7 @@
 rootProject.name = 'tabber'
+include ':react-native-overflow-view'
+project(':react-native-overflow-view').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-overflow-view/android')
 include ':react-native-vector-icons'
 project(':react-native-vector-icons').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-vector-icons/android')
-include ':react-native-view-overflow'
-project(':react-native-view-overflow').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-view-overflow/android')
 
 include ':app'
