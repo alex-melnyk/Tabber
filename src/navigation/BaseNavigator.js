@@ -1,15 +1,12 @@
 import React from 'react';
-import {createBottomTabNavigator} from 'react-navigation';
+import {createAppContainer, createBottomTabNavigator} from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import ViewOverflow from 'react-native-view-overflow';
-
-import {AddButton} from "../components/common/AddButton";
 
 import Bookmarks from "../components/Bookmarks";
 import Likes from "../components/Likes";
 import Private from "../components/Private";
 import Profile from "../components/Profile";
-import {TouchableWithoutFeedback} from "react-native";
 
 
 const BaseNavigator = createBottomTabNavigator({
@@ -40,7 +37,7 @@ const BaseNavigator = createBottomTabNavigator({
     Adding: {
         screen: () => null,
         navigationOptions: () => ({
-            tabBarIcon: <AddButton/>
+            tabBarIcon: null
         })
     },
     Private: {
@@ -68,48 +65,6 @@ const BaseNavigator = createBottomTabNavigator({
         })
     }
 }, {
-    tabBarComponent: (props) => {
-        const {
-            navigation: {state: {index, routes}},
-            style,
-            activeTintColor,
-            inactiveTintColor,
-            renderIcon,
-            jumpTo
-        } = props;
-
-        return (
-            <ViewOverflow style={{
-                flexDirection: 'row',
-                height: 50,
-                width: '100%',
-                ...style
-            }}>
-                {
-                    routes.map((route, idx) => (
-                        <ViewOverflow
-                            key={route.key}
-                            style={{
-                                flex: 1,
-                                alignItems: 'center',
-                                justifyContent: 'center'
-                            }}
-                        >
-                            <TouchableWithoutFeedback
-                                onPress={() => jumpTo(route.key)}
-                            >
-                                {renderIcon({
-                                    route,
-                                    focused: index === idx,
-                                    tintColor: index === idx ? activeTintColor : inactiveTintColor
-                                })}
-                            </TouchableWithoutFeedback>
-                        </ViewOverflow>
-                    ))
-                }
-            </ViewOverflow>
-        );
-    },
     tabBarOptions: {
         showLabel: false,
         activeTintColor: '#F8F8F8',
@@ -121,14 +76,6 @@ const BaseNavigator = createBottomTabNavigator({
     }
 });
 
-const defaultGetStateForAction = BaseNavigator.router.getStateForAction;
+const BaseNavigatorContainer = createAppContainer(BaseNavigator);
 
-// BaseNavigator.router.getStateForAction = (action, state) => {
-//     if (action.type === NavigationActions.NAVIGATE && action.routeName === 'Adding') {
-//         return null;
-//     }
-//
-//     return defaultGetStateForAction(action, state);
-// };
-
-export {BaseNavigator};
+export {BaseNavigatorContainer as BaseNavigator};
