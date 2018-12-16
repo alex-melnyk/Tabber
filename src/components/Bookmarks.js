@@ -1,15 +1,26 @@
 import React, {Component} from 'react';
-import {SafeAreaView, Text} from 'react-native';
+import {FlatList, SafeAreaView, View} from 'react-native';
+import {randomColor} from "../utils/index";
 
 class Bookmarks extends Component {
     render() {
         return (
             <SafeAreaView style={{
                 flex: 1,
-                alignItems: 'center',
                 justifyContent: 'center'
             }}>
-                <Text>Bookmarks</Text>
+                <FlatList
+                    data={[...new Array(20)].map((v, i) => ({key: `item_${i}`}))}
+                    renderItem={({item}) => (
+                        <View style={{
+                            margin: 10,
+                            flex: 1,
+                            minHeight: 150,
+                            borderRadius: 10,
+                            backgroundColor: randomColor()
+                        }} />
+                    )}
+                />
             </SafeAreaView>
         );
     }
