@@ -1,7 +1,11 @@
 import React from 'react';
 import {SafeAreaView, TouchableOpacity, View} from "react-native";
 
-const MagicTabBar = ({navigation, activeTintColor, inactiveTintColor, renderIcon, jumpTo}) => {
+const MagicTabBar = (params) => {
+    console.log(params);
+
+    const {style, navigation, activeTintColor, inactiveTintColor, renderIcon, jumpTo} = params;
+
     const {
         index,
         routes
@@ -16,13 +20,22 @@ const MagicTabBar = ({navigation, activeTintColor, inactiveTintColor, renderIcon
                 bottom: 'always',
             }}
         >
+            <SafeAreaView
+                style={[Styles.fakeBackground, style]}
+                forceInset={{
+                    top: 'never',
+                    bottom: 'always',
+                }}
+            >
+                <View style={{height: 49}} />
+            </SafeAreaView>
             <View style={Styles.content}>
                 {
                     routes.map((route, idx) => {
                         const focused = index === idx;
 
-                        if ((!route.params || !route.params.navigationDisabled)) {
-                            const button= (
+                        if (!route.params || !route.params.navigationDisabled) {
+                            return (
                                 <TouchableOpacity
                                     key={route.key}
                                     style={Styles.tabStyle}
@@ -39,8 +52,6 @@ const MagicTabBar = ({navigation, activeTintColor, inactiveTintColor, renderIcon
                                     }
                                 </TouchableOpacity>
                             );
-
-                            return button;
                         }
 
                         const Icon = renderIcon({
@@ -64,9 +75,15 @@ const MagicTabBar = ({navigation, activeTintColor, inactiveTintColor, renderIcon
 
 const Styles = {
     container: {
+        position: 'absolute',
+        bottom: 0,
+        width: '100%',
         justifyContent: 'flex-end',
-        minHeight: 200,
-        // backgroundColor: 'red',
+        minHeight: 200
+    },
+    fakeBackground: {
+        position: 'absolute',
+        width: '100%'
     },
     content: {
         flex: 1,
@@ -74,7 +91,7 @@ const Styles = {
         alignItems: 'stretch'
     },
     tabStyle: {
-        paddingVertical: 15,
+        paddingVertical: 11,
         paddingHorizontal: 15,
         justifyContent: 'flex-end',
         alignItems: 'center'

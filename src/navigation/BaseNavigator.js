@@ -6,8 +6,6 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import {AddButton, Bookmarks, Likes, Private, Profile} from "../components";
 import {MagicTabBar} from "../components/common/MagicTabBar";
 
-const DEFAULT_HEIGHT = 49;
-
 const BaseNavigator = createBottomTabNavigator({
     Bookmarks: {
         screen: Bookmarks,
