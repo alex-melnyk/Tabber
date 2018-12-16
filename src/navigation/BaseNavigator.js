@@ -1,9 +1,12 @@
 import React from 'react';
-import {createAppContainer, createBottomTabNavigator} from 'react-navigation';
+import {TouchableOpacity, View} from "react-native";
+import {createAppContainer, createBottomTabNavigator, SafeAreaView} from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import {AddButton, Bookmarks, Likes, Private, Profile} from "../components";
+import {MagicTabBar} from "../components/common/MagicTabBar";
 
+const DEFAULT_HEIGHT = 49;
 
 const BaseNavigator = createBottomTabNavigator({
     Bookmarks: {
@@ -33,9 +36,7 @@ const BaseNavigator = createBottomTabNavigator({
     MultiBar: {
         screen: () => null,
         navigationOptions: () => ({
-            tabBarIcon: (
-                <AddButton/>
-            )
+            tabBarIcon: null
         })
     },
     Private: {
@@ -63,6 +64,7 @@ const BaseNavigator = createBottomTabNavigator({
         })
     }
 }, {
+    tabBarComponent: MagicTabBar,
     tabBarOptions: {
         showLabel: false,
         activeTintColor: '#F8F8F8',

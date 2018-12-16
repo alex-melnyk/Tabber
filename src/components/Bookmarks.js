@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
-import {SafeAreaView, Text, TouchableOpacity} from 'react-native';
-import {AddButton} from "./common/AddButton";
+import {SafeAreaView, Text} from 'react-native';
 
 class Bookmarks extends Component {
     render() {
@@ -10,14 +9,7 @@ class Bookmarks extends Component {
                 alignItems: 'center',
                 justifyContent: 'center'
             }}>
-                <TouchableOpacity style={{
-                    width: '100%',
-                    height: 200,
-                    backgroundColor: 'violet'
-                }} />
-
-                {/*<Text>Bookmarks</Text>*/}
-                <AddButton/>
+                <Text>Bookmarks</Text>
             </SafeAreaView>
         );
     }

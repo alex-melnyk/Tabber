@@ -1,30 +1,20 @@
 import React, {Component} from 'react';
-import {TouchableOpacity} from 'react-native';
-import View from 'react-native-overflow-view';
+import {View, TouchableOpacity} from 'react-native';
 
 class AddButton extends Component {
     render() {
         return (
-            <View
+            <TouchableOpacity
+                // pointerEvents="box-none"
                 style={{
                     position: 'absolute',
-                    width: 100,
-                    height: 100,
+                    width: 120,
+                    height: 900,
                     backgroundColor: 'red'
                 }}
             >
-                <TouchableOpacity
-                    style={{
-                        left: -100,
-                        top: -100,
-                        width: 150,
-                        height: 150,
-                        backgroundColor: 'green'
-                    }}
-                    onPress={() => {
-                    }}
-                />
-            </View>
+
+            </TouchableOpacity>
         );
     }
 }
