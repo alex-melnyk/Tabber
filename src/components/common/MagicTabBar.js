@@ -92,7 +92,7 @@ const Styles = {
     },
     tabStyle: {
         paddingVertical: 11,
-        paddingHorizontal: 15,
+        width: 50,
         justifyContent: 'flex-end',
         alignItems: 'center'
     }
