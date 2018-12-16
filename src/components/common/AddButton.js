@@ -4,7 +4,7 @@ import {Animated, TouchableOpacity, TouchableWithoutFeedback, View} from 'react-
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {randomColor} from "../../utils/index";
 
-const ANIMATION_DURATION = 5000;
+const ANIMATION_DURATION = 300;
 
 class AddButton extends Component {
     activation = new Animated.Value(0);
@@ -29,13 +29,13 @@ class AddButton extends Component {
             this.setState({active: false});
             Animated.parallel([
                 Animated.timing(this.activation, {toValue: 0, duration: ANIMATION_DURATION}),
-                Animated.stagger(1000, routes.map((v, i) => Animated.timing(this[`actionActivation_${(routes.length - 1) - i}`], {toValue: 0, duration: ANIMATION_DURATION})))
+                Animated.stagger(100, routes.map((v, i) => Animated.timing(this[`actionActivation_${(routes.length - 1) - i}`], {toValue: 0, duration: ANIMATION_DURATION})))
             ]).start();
         } else {
             this.setState({active: true});
             Animated.parallel([
                 Animated.timing(this.activation, {toValue: 1, duration: ANIMATION_DURATION}),
-                Animated.stagger(1000, routes.map((v, i) => Animated.timing(this[`actionActivation_${i}`], {toValue: 1, duration: ANIMATION_DURATION})))
+                Animated.stagger(100, routes.map((v, i) => Animated.timing(this[`actionActivation_${i}`], {toValue: 1, duration: ANIMATION_DURATION})))
             ]).start();
         }
     };
@@ -181,7 +181,7 @@ const Styles = {
         width: 80,
         height: 80,
         borderRadius: 50,
-        backgroundColor: 'red'
+        backgroundColor: '#1DA2FF'
     },
     toggleIcon: {
         fontSize: 30,

@@ -29,7 +29,10 @@ const MagicTabBar = (params) => {
             >
                 <View style={{height: 49}} />
             </SafeAreaView>
-            <View style={Styles.content}>
+            <View
+                pointerEvents="box-none"
+                style={Styles.content}
+            >
                 {
                     routes.map((route, idx) => {
                         const focused = index === idx;
@@ -88,13 +91,13 @@ const Styles = {
     content: {
         flex: 1,
         flexDirection: 'row',
-        alignItems: 'stretch'
+        alignItems: 'flex-end'
     },
     tabStyle: {
-        paddingVertical: 11,
+        height: 50,
         width: 50,
-        justifyContent: 'flex-end',
-        alignItems: 'center'
+        alignItems: 'center',
+        justifyContent: 'center'
     }
 };
 
