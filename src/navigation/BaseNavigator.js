@@ -36,8 +36,11 @@ const BaseNavigator = createBottomTabNavigator({
     MultiBar: {
         screen: () => null,
         navigationOptions: () => ({
-            tabBarIcon: null
-        })
+            tabBarIcon: (<AddButton/>)
+        }),
+        params: {
+            navigationDisabled: true
+        }
     },
     Private: {
         screen: Private,

@@ -21,25 +21,40 @@ const MagicTabBar = ({navigation, activeTintColor, inactiveTintColor, renderIcon
                     routes.map((route, idx) => {
                         const focused = index === idx;
 
-                        return (
-                            <TouchableOpacity
-                                key={route.key}
-                                style={{
-                                    flex: 1,
-                                    justifyContent: 'flex-end',
-                                    alignItems: 'center'
-                                }}
-                                onPress={() => jumpTo(route.key)}
-                            >
-                                {
-                                    renderIcon({
-                                        route,
-                                        focused,
-                                        tintColor: focused ? activeTintColor : inactiveTintColor
-                                    })
-                                }
-                            </TouchableOpacity>
-                        );
+                        if ((!route.params || !route.params.navigationDisabled)) {
+                            const button= (
+                                <TouchableOpacity
+                                    key={route.key}
+                                    style={Styles.tabStyle}
+                                    onPress={() => (!route.params || !route.params.navigationDisabled) && jumpTo(route.key)}
+                                >
+                                    {
+                                        renderIcon({
+                                            route,
+                                            focused,
+                                            tintColor: focused
+                                                ? activeTintColor
+                                                : inactiveTintColor
+                                        })
+                                    }
+                                </TouchableOpacity>
+                            );
+
+                            return button;
+                        }
+
+                        const Icon = renderIcon({
+                            route,
+                            focused,
+                            tintColor: focused
+                                ? activeTintColor
+                                : inactiveTintColor
+                        });
+
+                        return {
+                            ...Icon,
+                            key: 'simple'
+                        };
                     })
                 }
             </View>
@@ -51,58 +66,19 @@ const Styles = {
     container: {
         justifyContent: 'flex-end',
         minHeight: 200,
-        backgroundColor: 'red',
+        // backgroundColor: 'red',
     },
     content: {
         flex: 1,
         flexDirection: 'row',
         alignItems: 'stretch'
+    },
+    tabStyle: {
+        paddingVertical: 15,
+        paddingHorizontal: 15,
+        justifyContent: 'flex-end',
+        alignItems: 'center'
     }
 };
 
 export {MagicTabBar};
-
-/*
-tabBarComponent: (props) => {
-    const {
-        navigation: {state: {index, routes}},
-        style,
-        activeTintColor,
-        inactiveTintColor,
-        renderIcon,
-        jumpTo
-    } = props;
-
-    return (
-        <ViewOverflow style={{
-            flexDirection: 'row',
-            height: 50,
-            width: '100%',
-            ...style
-        }}>
-            {
-                routes.map((route, idx) => (
-                    <ViewOverflow
-                        key={route.key}
-                        style={{
-                            flex: 1,
-                            alignItems: 'center',
-                            justifyContent: 'center'
-                        }}
-                    >
-                        <TouchableWithoutFeedback
-                            onPress={() => jumpTo(route.key)}
-                        >
-                            {renderIcon({
-                                route,
-                                focused: index === idx,
-                                tintColor: index === idx ? activeTintColor : inactiveTintColor
-                            })}
-                        </TouchableWithoutFeedback>
-                    </ViewOverflow>
-                ))
-            }
-        </ViewOverflow>
-    );
-}
-*/
