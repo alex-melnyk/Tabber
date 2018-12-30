@@ -1,13 +1,12 @@
 import React from 'react';
-import {TouchableOpacity, View} from "react-native";
-import {createAppContainer, createBottomTabNavigator, SafeAreaView} from 'react-navigation';
+import {createAppContainer, createBottomTabNavigator, createStackNavigator} from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import {AddButton, Bookmarks, Likes, Private, Profile} from "../components";
-import {MagicTabBar} from "../components/common/MagicTabBar";
+import {AddButton, Bookmarks, Likes, MagicTabBar, Private, Profile, Settings} from "../components";
+import {Routes} from "./Routes";
 
-const BaseNavigator = createBottomTabNavigator({
-    Bookmarks: {
+const TabsNavigator = createBottomTabNavigator({
+    [Routes.TabsBookmarks]: {
         screen: Bookmarks,
         navigationOptions: () => ({
             tabBarIcon: ({tintColor}) => (
@@ -19,7 +18,7 @@ const BaseNavigator = createBottomTabNavigator({
             )
         })
     },
-    Likes: {
+    [Routes.TabsLikes]: {
         screen: Likes,
         navigationOptions: () => ({
             tabBarIcon: ({tintColor}) => (
@@ -34,13 +33,30 @@ const BaseNavigator = createBottomTabNavigator({
     MultiBar: {
         screen: () => null,
         navigationOptions: () => ({
-            tabBarIcon: (<AddButton/>)
+            tabBarIcon: (
+                <AddButton
+                    routes={[
+                        {
+                            routeName: Routes.OtherScreen,
+                            color: 'red'
+                        },
+                        {
+                            routeName: Routes.OtherScreen,
+                            color: 'green'
+                        },
+                        {
+                            routeName: Routes.OtherScreen,
+                            color: 'blue'
+                        },
+                    ]}
+                />
+            )
         }),
         params: {
             navigationDisabled: true
         }
     },
-    Private: {
+    [Routes.TabsPrivate]: {
         screen: Private,
         navigationOptions: () => ({
             tabBarIcon: ({tintColor}) => (
@@ -52,7 +68,7 @@ const BaseNavigator = createBottomTabNavigator({
             )
         })
     },
-    Profile: {
+    [Routes.TabsProfile]: {
         screen: Profile,
         navigationOptions: () => ({
             tabBarIcon: ({tintColor}) => (
@@ -75,6 +91,13 @@ const BaseNavigator = createBottomTabNavigator({
         },
         tabStyle: {}
     }
+});
+
+const BaseNavigator = createStackNavigator({
+    [Routes.Tabs]: TabsNavigator,
+    [Routes.OtherScreen]: Settings
+}, {
+    headerMode: 'none'
 });
 
 const BaseNavigatorContainer = createAppContainer(BaseNavigator);

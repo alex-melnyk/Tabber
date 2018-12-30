@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {Animated, TouchableOpacity, TouchableWithoutFeedback, View} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {randomColor} from "../../utils/index";
+import {withNavigation} from "react-navigation";
 
 const ANIMATION_DURATION = 300;
 
@@ -17,7 +18,11 @@ class AddButton extends Component {
     actionPressed = (route) => {
         this.togglePressed();
 
-        console.log('ROUTE', route);
+        // OPTION: Wait to animation complete
+        setTimeout(() => {
+            // NAVIGATE TO SELECTED ROUTE
+            this.props.navigation.navigate({routeName: route.routeName});
+        }, 500);
     };
 
     togglePressed = () => {
@@ -157,6 +162,7 @@ class AddButton extends Component {
 
 AddButton.propTypes = {
     routes: PropTypes.arrayOf(PropTypes.shape({
+        routeName: PropTypes.string,
         color: PropTypes.string
     }))
 };
@@ -202,4 +208,6 @@ const Styles = {
     }
 };
 
-export {AddButton};
+const AddButtonContainer = withNavigation(AddButton);
+
+export {AddButtonContainer as AddButton};

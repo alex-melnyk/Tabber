@@ -1,11 +1,7 @@
 import React from 'react';
 import {SafeAreaView, TouchableOpacity, View} from "react-native";
 
-const MagicTabBar = (params) => {
-    console.log(params);
-
-    const {style, navigation, activeTintColor, inactiveTintColor, renderIcon, jumpTo} = params;
-
+const MagicTabBar = ({style, navigation, activeTintColor, inactiveTintColor, renderIcon, jumpTo}) => {
     const {
         index,
         routes
@@ -39,21 +35,15 @@ const MagicTabBar = (params) => {
 
                         if (!route.params || !route.params.navigationDisabled) {
                             return (
-                                <TouchableOpacity
+                                <TabIcon
                                     key={route.key}
-                                    style={Styles.tabStyle}
+                                    route={route}
+                                    renderIcon={renderIcon}
+                                    focused={focused}
+                                    activeTintColor={activeTintColor}
+                                    inactiveTintColor={inactiveTintColor}
                                     onPress={() => (!route.params || !route.params.navigationDisabled) && jumpTo(route.key)}
-                                >
-                                    {
-                                        renderIcon({
-                                            route,
-                                            focused,
-                                            tintColor: focused
-                                                ? activeTintColor
-                                                : inactiveTintColor
-                                        })
-                                    }
-                                </TouchableOpacity>
+                                />
                             );
                         }
 
@@ -75,6 +65,23 @@ const MagicTabBar = (params) => {
         </SafeAreaView>
     );
 };
+
+const TabIcon = ({route, renderIcon, focused, activeTintColor, inactiveTintColor, onPress}) => (
+    <TouchableOpacity
+        style={Styles.tabStyle}
+        onPress={() => onPress && onPress()}
+    >
+        {
+            renderIcon({
+                route,
+                focused,
+                tintColor: focused
+                    ? activeTintColor
+                    : inactiveTintColor
+            })
+        }
+    </TouchableOpacity>
+);
 
 const Styles = {
     container: {
