@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {Animated, TouchableOpacity, TouchableWithoutFeedback, View} from 'react-native';
+import {Animated, TouchableOpacity, TouchableWithoutFeedback, Vibration, View} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {randomColor} from "../../utils/index";
 import {withNavigation} from "react-navigation";
@@ -34,15 +34,23 @@ class AddButton extends Component {
             this.setState({active: false});
             Animated.parallel([
                 Animated.timing(this.activation, {toValue: 0, duration: ANIMATION_DURATION}),
-                Animated.stagger(100, routes.map((v, i) => Animated.timing(this[`actionActivation_${(routes.length - 1) - i}`], {toValue: 0, duration: ANIMATION_DURATION})))
+                Animated.stagger(100, routes.map((v, i) => Animated.timing(this[`actionActivation_${(routes.length - 1) - i}`], {
+                    toValue: 0,
+                    duration: ANIMATION_DURATION
+                })))
             ]).start();
         } else {
             this.setState({active: true});
             Animated.parallel([
                 Animated.timing(this.activation, {toValue: 1, duration: ANIMATION_DURATION}),
-                Animated.stagger(100, routes.map((v, i) => Animated.timing(this[`actionActivation_${i}`], {toValue: 1, duration: ANIMATION_DURATION})))
+                Animated.stagger(100, routes.map((v, i) => Animated.timing(this[`actionActivation_${i}`], {
+                    toValue: 1,
+                    duration: ANIMATION_DURATION
+                })))
             ]).start();
         }
+
+        Vibration.vibrate();
     };
 
     renderActions = () => {
