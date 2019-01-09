@@ -3358,8 +3358,9 @@ react-native-gesture-handler@^1.0.0:
     invariant "^2.2.2"
     prop-types "^15.5.10"
 
-react-native-multibar@../react-native-multibar/:
-  version "0.0.2"
+react-native-multibar@^0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/react-native-multibar/-/react-native-multibar-0.0.4.tgz#df7c63988036e56ffa3ed0af72ff72432941b128"
 
 react-native-overflow-view@^1.0.2:
   version "1.0.2"
