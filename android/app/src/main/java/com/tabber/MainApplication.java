@@ -3,6 +3,7 @@ package com.tabber;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.reactNativeQuickActions.AppShortcutsPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import com.overflowView.OverflowViewPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
@@ -26,6 +27,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new AppShortcutsPackage(),
             new RNGestureHandlerPackage(),
             new OverflowViewPackage(),
             new VectorIconsPackage()
