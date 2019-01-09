@@ -3358,16 +3358,9 @@ react-native-gesture-handler@^1.0.0:
     invariant "^2.2.2"
     prop-types "^15.5.10"
 
-react-native-multibar@../react-native-multibar/:
-  version "0.0.2"
-
 react-native-overflow-view@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/react-native-overflow-view/-/react-native-overflow-view-1.0.2.tgz#83e12cc9a58a7d7b35f82bd03b9d888906ce5e71"
-
-react-native-quick-actions@^0.3.8:
-  version "0.3.8"
-  resolved "https://registry.yarnpkg.com/react-native-quick-actions/-/react-native-quick-actions-0.3.8.tgz#a76cb9b93e965ba52b463cb9db0fa8f9cd3f2147"
 
 react-native-safe-area-view@^0.11.0:
   version "0.11.0"
