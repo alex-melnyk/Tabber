@@ -137,8 +137,6 @@ android {
 }
 
 dependencies {
-    compile project(':react-native-quick-actions')
-    compile project(':react-native-gesture-handler')
     compile project(':react-native-overflow-view')
     compile project(':react-native-vector-icons')
     compile fileTree(dir: "libs", include: ["*.jar"])
