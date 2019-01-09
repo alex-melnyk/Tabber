@@ -124,13 +124,11 @@ const TabsNavigator = createBottomTabNavigator({
     }
 });
 
-const BaseNavigator = createStackNavigator({
+const BaseNavigatorContainer = createAppContainer(createStackNavigator({
     [Routes.Tabs]: TabsNavigator,
     [Routes.OtherScreen]: Settings
 }, {
     headerMode: 'none'
-});
-
-const BaseNavigatorContainer = createAppContainer(BaseNavigator);
+}));
 
 export {BaseNavigatorContainer as BaseNavigator};
