@@ -1,13 +1,13 @@
 import React from 'react';
-import {TouchableOpacity, View} from "react-native";
-import {createAppContainer, createBottomTabNavigator, SafeAreaView} from 'react-navigation';
+import {createAppContainer, createBottomTabNavigator, createStackNavigator} from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import {MultiBar, MultiBarToggle} from 'react-native-multibar';
 
-import {AddButton, Bookmarks, Likes, Private, Profile} from "../components";
-import {MagicTabBar} from "../components/common/MagicTabBar";
+import {Bookmarks, Likes, Private, Profile, Settings} from "../components";
+import {Routes} from "./Routes";
 
-const BaseNavigator = createBottomTabNavigator({
-    Bookmarks: {
+const TabsNavigator = createBottomTabNavigator({
+    [Routes.TabsBookmarks]: {
         screen: Bookmarks,
         navigationOptions: () => ({
             tabBarIcon: ({tintColor}) => (
@@ -19,7 +19,7 @@ const BaseNavigator = createBottomTabNavigator({
             )
         })
     },
-    Likes: {
+    [Routes.TabsLikes]: {
         screen: Likes,
         navigationOptions: () => ({
             tabBarIcon: ({tintColor}) => (
@@ -33,14 +33,61 @@ const BaseNavigator = createBottomTabNavigator({
     },
     MultiBar: {
         screen: () => null,
-        navigationOptions: () => ({
-            tabBarIcon: (<AddButton/>)
+        navigationOptions: ({navigation}) => ({
+            tabBarIcon: () => (
+                <MultiBarToggle
+                    navigation={navigation}
+                    actionSize={30}
+                    routes={[
+                        {
+                            routeName: Routes.OtherScreen,
+                            color: '#FF8360',
+                            icon: (
+                                <Icon
+                                    name="rocket"
+                                    color="#333333"
+                                    size={15}
+                                />
+                            )
+                        },
+                        {
+                            routeName: Routes.OtherScreen,
+                            color: '#E8E288',
+                            icon: (
+                                <Icon
+                                    name="dashboard"
+                                    color="#333333"
+                                    size={15}
+                                />
+                            )
+                        },
+                        {
+                            routeName: Routes.OtherScreen,
+                            color: '#7DCE82',
+                            icon: (
+                                <Icon
+                                    name="gears"
+                                    color="#333333"
+                                    size={15}
+                                />
+                            )
+                        },
+                    ]}
+                    icon={(
+                        <Icon
+                            name="plus"
+                            color="#FFFFFF"
+                            size={24}
+                        />
+                    )}
+                />
+            )
         }),
         params: {
             navigationDisabled: true
         }
     },
-    Private: {
+    [Routes.TabsPrivate]: {
         screen: Private,
         navigationOptions: () => ({
             tabBarIcon: ({tintColor}) => (
@@ -52,7 +99,7 @@ const BaseNavigator = createBottomTabNavigator({
             )
         })
     },
-    Profile: {
+    [Routes.TabsProfile]: {
         screen: Profile,
         navigationOptions: () => ({
             tabBarIcon: ({tintColor}) => (
@@ -65,7 +112,7 @@ const BaseNavigator = createBottomTabNavigator({
         })
     }
 }, {
-    tabBarComponent: MagicTabBar,
+    tabBarComponent: MultiBar,
     tabBarOptions: {
         showLabel: false,
         activeTintColor: '#F8F8F8',
@@ -77,6 +124,11 @@ const BaseNavigator = createBottomTabNavigator({
     }
 });
 
-const BaseNavigatorContainer = createAppContainer(BaseNavigator);
+const BaseNavigatorContainer = createAppContainer(createStackNavigator({
+    [Routes.Tabs]: TabsNavigator,
+    [Routes.OtherScreen]: Settings
+}, {
+    headerMode: 'none'
+}));
 
 export {BaseNavigatorContainer as BaseNavigator};
